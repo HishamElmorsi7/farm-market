@@ -1,3 +1,7 @@
+// The idea here is to replace template with data object
+// when we want to replace many products that exist at the same
+// page we can easily loop through each product and replace
+// the template with each object then combine them together
 const replaceTemplate = (template, product) => {
     let output = template.replace(/#productid#/g, product.id)
     output = output.replace(/#productname#/g, product.productName)

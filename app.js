@@ -32,12 +32,34 @@ server = http.createServer((req, res) => {
         })
         res.end(overview)
 
-    } else if (path = '/api') {
+    } else if (path.startsWith('/product')) {
+        parsed_path = path.split('/')
+        id = parsed_path[2]
+        if (dataObjs[id]) {
+
+            product = dataObjs[id]
+            res.writeHead(200, {
+                'Content-Type': 'text/html'
+            })
+
+            rendered_result = replaceTemplate(template_product, product)
+            console.log(rendered_result)
+            res.end(rendered_result)
+
+        } else {
+            res.end(`INVALID ID ${id}`)
+        }
+
+
+
+
+    } else if (path === '/api') {
         res.writeHead(200, {
             'Content-Type': 'application/json'
         })
-        res.end(jsonData)
+
     } else {
+        console.log('hi')
         res.writeHead(400, {
             'Content-type': 'text/html',
             'IamMeta': 'Hisham'
